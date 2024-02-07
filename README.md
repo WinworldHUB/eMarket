@@ -1,3 +1,10 @@
+#Instructions
+
+## Tests
+
+We are using Jest for writing tests.
+Please read [Jest Docs](https://jestjs.io/docs/getting-started) for more details.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
