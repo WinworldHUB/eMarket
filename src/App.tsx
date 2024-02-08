@@ -1,11 +1,15 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
-import SideMenu from "./lib/components/side-menu";
 import PageLayout from "./lib/components/page-layout";
+import SignUp from "./lib/components/SignUp";
 
 function App() {
-  return <PageLayout isShowSideMenu />;
+  return (
+    <div>
+      <PageLayout isShowSideMenu />
+      <SignUp/>
+    </div>
+  );
 }
 
 export default App;
