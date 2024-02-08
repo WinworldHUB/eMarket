@@ -4,7 +4,14 @@ export interface Order {
     price: number;
     status: string;
   }
+  // export interface Order {
+  //   id: number;
+  //   orderValue: number;
+  //   status: string;
+  //   orderDate: "";
+  //   paymentDate: "";
   
+  // }
   const generateRandomStatus = (): string => {
     const statuses = ["Sold", "On the way", "Payment Pending"];
     const randomIndex = Math.floor(Math.random() * statuses.length);

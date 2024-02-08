@@ -64,8 +64,8 @@ const Dashboard: React.FC = () => {
               onClick={() => handleCardClick("Card 1")}
             >
               <Card.Body>
-                <Card.Title>Items Sold</Card.Title>
-                <Card.Text>Click to see sold items</Card.Text>
+                <Card.Title>Orders (Today)</Card.Title>
+                <Card.Text>Click to see orders placed today</Card.Text>
               </Card.Body>
             </Card>
           </Col>
@@ -75,8 +75,8 @@ const Dashboard: React.FC = () => {
               onClick={() => handleCardClick("Card 2")}
             >
               <Card.Body>
-                <Card.Title>Items on the way</Card.Title>
-                <Card.Text>Click to see items on the way</Card.Text>
+                <Card.Title>All unpaid orders</Card.Title>
+                <Card.Text>Click to see all unpaid orders</Card.Text>
               </Card.Body>
             </Card>
           </Col>
@@ -86,8 +86,8 @@ const Dashboard: React.FC = () => {
               onClick={() => handleCardClick("Card 3")}
             >
               <Card.Body>
-                <Card.Title>Payment Pending</Card.Title>
-                <Card.Text>Click to see pending payments</Card.Text>
+                <Card.Title>All orders</Card.Title>
+                <Card.Text>Click to see all orders</Card.Text>
               </Card.Body>
             </Card>
           </Col>
@@ -134,3 +134,5 @@ const Dashboard: React.FC = () => {
 };
 
 export default Dashboard;
+
+// modal cannot close on background
