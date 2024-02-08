@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import SideMenu from "./side-menu";
+import { Container, Row, Col } from "react-bootstrap";
 
 interface PageLayoutProps {
   isShowSideMenu?: boolean;
@@ -11,10 +12,18 @@ const PageLayout: FC<PageLayoutProps> = ({
   children,
 }: PageLayoutProps) => {
   return (
-    <>
-      {isShowSideMenu ? <SideMenu /> : <></>}
-      {children}
-    </>
+    <Container fluid>
+      <Row>
+        {isShowSideMenu && (
+          <Col md={3} style={{ backgroundColor: "#f8f9fa" }}>
+            <SideMenu />
+          </Col>
+        )}
+        <Col>
+          {children}
+        </Col>
+      </Row>
+    </Container>
   );
 };
 
