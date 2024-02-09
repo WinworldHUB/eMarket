@@ -36,11 +36,11 @@ const Dashboard: React.FC = () => {
     chartRef.current = new Chart(ctx, {
       type: "line",
       data: {
-        labels: data.map((item) => item.itemName),
+        labels: data.map((item) => item.id),
         datasets: [
           {
             label: "Price", // Label as price
-            data: data.map((item) => item.price),
+            data: data.map((item) => item.orderValue),
             fill: false,
             borderColor: "rgba(54, 162, 235, 1)",
             borderWidth: 1,
@@ -108,18 +108,18 @@ const Dashboard: React.FC = () => {
                   <thead>
                     <tr>
                       <th>#</th>
-                      <th>Item Name</th>
+                      <th>Order Date</th>
                       <th>Status</th>
-                      <th>Price</th>
+                      <th>Order Value</th>
                     </tr>
                   </thead>
                   <tbody>
                     {data.map((order, index) => (
                       <tr key={index}>
                         <td>{order.id}</td>
-                        <td>{order.itemName}</td>
+                        <td>{order.orderDate}</td>
                         <td>{order.status}</td>
-                        <td>${order.price.toFixed(2)}</td>
+                        <td>{order.orderValue}</td>
                       </tr>
                     ))}
                   </tbody>
