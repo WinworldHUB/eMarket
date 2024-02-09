@@ -1,8 +1,16 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Card, Row, Col, Table } from "react-bootstrap";
+import { Card, Row, Col } from "react-bootstrap";
 import Chart from "chart.js/auto";
 import dummyOrders, { Order } from "../lib/data/dummyData";
 import PageLayout from "../lib/components/page-layout";
+import DataTable, { TableColumn } from 'react-data-table-component';
+
+interface DataRow {
+  id: string;
+  orderDate: string;
+  status: string;
+  orderValue: number;
+}
 
 const Dashboard: React.FC = () => {
   const [selectedCard, setSelectedCard] = useState<string>("Card 1");
@@ -54,10 +62,39 @@ const Dashboard: React.FC = () => {
     handleCardClick(selectedCard);
   }, []);
 
+  const columns: TableColumn<DataRow>[] = [
+    {
+      name: '#',
+      selector: row => row.id,
+      sortable: true,
+    },
+    {
+      name: 'Order Date',
+      selector: row => row.orderDate,
+      sortable: true,
+    },
+    {
+      name: 'Status',
+      selector: row => row.status,
+      sortable: true,
+    },
+    {
+      name: 'Order Value',
+      selector: row => row.orderValue,
+      sortable: true,
+    },
+  ];
+  const convertedData: DataRow[] = data.map((order) => ({
+    id: order.id.toString(),
+    orderDate: order.orderDate,
+    status: order.status,
+    orderValue: order.orderValue,
+  }));
+  
   return (
     <PageLayout isShowSideMenu>
       <div className="dashboard-content ">
-        <Row className="justify-content-center" style={{ marginTop: "20px" }}>
+      <Row className="justify-content-center" style={{ marginTop: "20px" }}>
           <Col>
             <Card
               style={{ width: "18rem", cursor: "pointer" }}
@@ -104,26 +141,13 @@ const Dashboard: React.FC = () => {
             {selectedCard && (
               <div>
                 <h2>{selectedCard}</h2>
-                <Table striped bordered hover>
-                  <thead>
-                    <tr>
-                      <th>#</th>
-                      <th>Order Date</th>
-                      <th>Status</th>
-                      <th>Order Value</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {data.map((order, index) => (
-                      <tr key={index}>
-                        <td>{order.id}</td>
-                        <td>{order.orderDate}</td>
-                        <td>{order.status}</td>
-                        <td>{order.orderValue}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </Table>
+                <DataTable
+                  columns={columns}
+                  data={convertedData}
+                  striped
+                  highlightOnHover
+                  pagination
+                />
               </div>
             )}
           </Col>
@@ -134,5 +158,3 @@ const Dashboard: React.FC = () => {
 };
 
 export default Dashboard;
-
-// modal cannot close on background
