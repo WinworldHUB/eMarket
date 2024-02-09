@@ -1,20 +1,14 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Card, Row, Col } from "react-bootstrap";
+import { Card, Row, Col, Modal, Button, Form } from "react-bootstrap";
 import Chart from "chart.js/auto";
 import dummyOrders, { Order } from "../lib/data/dummyData";
 import PageLayout from "../lib/components/page-layout";
-import DataTable, { TableColumn } from 'react-data-table-component';
-
-interface DataRow {
-  id: string;
-  orderDate: string;
-  status: string;
-  orderValue: number;
-}
+import DataTable, { TableColumn } from "react-data-table-component";
 
 const Dashboard: React.FC = () => {
   const [selectedCard, setSelectedCard] = useState<string>("Card 1");
   const [data, setData] = useState<Order[]>([]);
+  const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
   const chartRef = useRef<Chart<"line"> | null>(null);
 
   const handleCardClick = (card: string) => {
@@ -47,7 +41,7 @@ const Dashboard: React.FC = () => {
         labels: data.map((item) => item.id),
         datasets: [
           {
-            label: "Price", // Label as price
+            label: "Order value",
             data: data.map((item) => item.orderValue),
             fill: false,
             borderColor: "rgba(54, 162, 235, 1)",
@@ -62,39 +56,50 @@ const Dashboard: React.FC = () => {
     handleCardClick(selectedCard);
   }, []);
 
-  const columns: TableColumn<DataRow>[] = [
+  const columns: TableColumn<Order>[] = [
     {
-      name: '#',
-      selector: row => row.id,
+      name: "#",
+      selector: (row) => row.id,
       sortable: true,
     },
     {
-      name: 'Order Date',
-      selector: row => row.orderDate,
+      name: "Order Date",
+      selector: (row) => row.orderDate,
       sortable: true,
     },
     {
-      name: 'Status',
-      selector: row => row.status,
+      name: "Status",
+      selector: (row) => row.status,
       sortable: true,
     },
     {
-      name: 'Order Value',
-      selector: row => row.orderValue,
+      name: "Order Value",
+      selector: (row) => row.orderValue,
       sortable: true,
     },
   ];
-  const convertedData: DataRow[] = data.map((order) => ({
-    id: order.id.toString(),
-    orderDate: order.orderDate,
-    status: order.status,
-    orderValue: order.orderValue,
-  }));
-  
+  const handleEdit = (order: Order) => {
+    setSelectedOrder(order);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedOrder(null);
+  };
+
+  const handleSaveModal = () => {
+    if (selectedOrder) {
+      // Update the order in the data
+      const newData = data.map((order) =>
+        order.id === selectedOrder.id ? selectedOrder : order
+      );
+      setData(newData);
+    }
+    handleCloseModal();
+  };
   return (
     <PageLayout isShowSideMenu>
       <div className="dashboard-content ">
-      <Row className="justify-content-center" style={{ marginTop: "20px" }}>
+        <Row className="justify-content-center" style={{ marginTop: "20px" }}>
           <Col>
             <Card
               style={{ width: "18rem", cursor: "pointer" }}
@@ -143,16 +148,84 @@ const Dashboard: React.FC = () => {
                 <h2>{selectedCard}</h2>
                 <DataTable
                   columns={columns}
-                  data={convertedData}
+                  data={data}
                   striped
                   highlightOnHover
                   pagination
+                  onRowClicked={handleEdit}
                 />
               </div>
             )}
           </Col>
         </Row>
       </div>
+      <Modal show={!!selectedOrder} onHide={handleCloseModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Order</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form.Group controlId="formOrderId">
+            <Form.Label>Order ID</Form.Label>
+            <Form.Control
+              type="number"
+              value={selectedOrder ? selectedOrder.id.toString() : ""}
+              onChange={(e) =>
+                setSelectedOrder((prevState) => ({
+                  ...prevState!,
+                  id: parseInt(e.target.value),
+                }))
+              }
+            />
+          </Form.Group>
+          <Form.Group controlId="formOrderDate">
+            <Form.Label>Order Date</Form.Label>
+            <Form.Control
+              type="text"
+              value={selectedOrder ? selectedOrder.orderDate : ""}
+              onChange={(e) =>
+                setSelectedOrder((prevState) => ({
+                  ...prevState!,
+                  orderDate: e.target.value,
+                }))
+              }
+            />
+          </Form.Group>
+          <Form.Group controlId="formStatus">
+            <Form.Label>Status</Form.Label>
+            <Form.Control
+              type="text"
+              value={selectedOrder ? selectedOrder.status : ""}
+              onChange={(e) =>
+                setSelectedOrder((prevState) => ({
+                  ...prevState!,
+                  status: e.target.value,
+                }))
+              }
+            />
+          </Form.Group>
+          <Form.Group controlId="formOrderValue">
+            <Form.Label>Order Value</Form.Label>
+            <Form.Control
+              type="number"
+              value={selectedOrder ? selectedOrder.orderValue.toString() : ""}
+              onChange={(e) =>
+                setSelectedOrder((prevState) => ({
+                  ...prevState!,
+                  orderValue: parseFloat(e.target.value),
+                }))
+              }
+            />
+          </Form.Group>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseModal}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleSaveModal}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </PageLayout>
   );
 };
