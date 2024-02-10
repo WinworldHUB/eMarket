@@ -1,10 +1,11 @@
 import React from 'react'
+import PageLayout from '../lib/components/page-layout'
 
 const Invoices = () => {
   return (
-    <div>
-      
-    </div>
+    <PageLayout isShowSideMenu>
+      Invoices
+    </PageLayout>
   )
 }
 
