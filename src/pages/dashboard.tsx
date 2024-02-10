@@ -17,17 +17,11 @@ const Dashboard: React.FC = () => {
     if (card === "Card 1") {
       filteredData = dummyOrders.filter((order) => order.status === "status1");
     } else if (card === "Card 2") {
-      filteredData = dummyOrders.filter(
-        (order) => order.status === "status2"
-      );
+      filteredData = dummyOrders.filter((order) => order.status === "status2");
     } else if (card === "Card 3") {
-      filteredData = dummyOrders.filter(
-        (order) => order.status === "status3"
-      );
+      filteredData = dummyOrders.filter((order) => order.status === "status3");
     } else if (card === "Card 4") {
-      filteredData = dummyOrders.filter(
-        (order) => order.status === "status4"
-      );
+      filteredData = dummyOrders.filter((order) => order.status === "status4");
     }
     setData(filteredData);
     updateChart(filteredData);
@@ -100,6 +94,16 @@ const Dashboard: React.FC = () => {
     }
     handleCloseModal();
   };
+
+  const handleDeleteOrder = () => {
+    if (selectedOrder) {
+      // Filter out the selected order from data
+      const newData = data.filter((order) => order.id !== selectedOrder.id);
+      setData(newData);
+    }
+    handleCloseModal();
+  };
+
   return (
     <PageLayout isShowSideMenu>
       <div className="dashboard-content ">
@@ -163,7 +167,13 @@ const Dashboard: React.FC = () => {
           </Col>
         </Row>
       </div>
-      <Modal centered backdrop="static" size="lg" show={!!selectedOrder} onHide={handleCloseModal}>
+      <Modal
+        centered
+        backdrop="static"
+        size="lg"
+        show={!!selectedOrder}
+        onHide={handleCloseModal}
+      >
         <Modal.Header closeButton>
           <Modal.Title>Edit Order</Modal.Title>
         </Modal.Header>
@@ -172,6 +182,7 @@ const Dashboard: React.FC = () => {
             <Form.Label>Order ID</Form.Label>
             <Form.Control
               type="number"
+              disabled
               value={selectedOrder ? selectedOrder.id.toString() : ""}
               onChange={(e) =>
                 setSelectedOrder((prevState) => ({
@@ -185,6 +196,7 @@ const Dashboard: React.FC = () => {
             <Form.Label>Order Date</Form.Label>
             <Form.Control
               type="text"
+              disabled
               value={selectedOrder ? selectedOrder.orderDate : ""}
               onChange={(e) =>
                 setSelectedOrder((prevState) => ({
@@ -196,8 +208,7 @@ const Dashboard: React.FC = () => {
           </Form.Group>
           <Form.Group controlId="formStatus">
             <Form.Label>Status</Form.Label>
-            <Form.Control
-              type="text"
+            <Form.Select
               value={selectedOrder ? selectedOrder.status : ""}
               onChange={(e) =>
                 setSelectedOrder((prevState) => ({
@@ -205,12 +216,18 @@ const Dashboard: React.FC = () => {
                   status: e.target.value,
                 }))
               }
-            />
+            >
+              <option value="">Select Status</option>
+              <option value="status1">status1</option>
+              <option value="status2">status2</option>
+              <option value="status3">status3</option>
+            </Form.Select>
           </Form.Group>
           <Form.Group controlId="formOrderValue">
             <Form.Label>Order Value</Form.Label>
             <Form.Control
               type="number"
+              disabled
               value={selectedOrder ? selectedOrder.orderValue.toString() : ""}
               onChange={(e) =>
                 setSelectedOrder((prevState) => ({
@@ -222,12 +239,25 @@ const Dashboard: React.FC = () => {
           </Form.Group>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseModal}>
-            Close
+          <Button
+            variant="danger"
+            onClick={handleDeleteOrder}
+            className="me-auto"
+          >
+            Delete
           </Button>
-          <Button variant="primary" onClick={handleSaveModal}>
-            Save Changes
-          </Button>
+          <div>
+            <Button
+              variant="secondary"
+              onClick={handleCloseModal}
+              className="me-2"
+            >
+              Close
+            </Button>
+            <Button variant="primary" onClick={handleSaveModal}>
+              Save Changes
+            </Button>
+          </div>
         </Modal.Footer>
       </Modal>
     </PageLayout>
@@ -236,6 +266,4 @@ const Dashboard: React.FC = () => {
 
 export default Dashboard;
 
-
 // delete button in modal on left side
-// fields are static
