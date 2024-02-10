@@ -3,14 +3,15 @@ import Home from "./pages/home";
 import SignIn from "./pages/signin";
 import { PageRoutes } from "./lib/constants";
 import Dashboard from "./pages/dashboard";
+import Invoices from "./pages/Invoices";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={PageRoutes.Home} element={<Home />} />
+        <Route path={PageRoutes.Home} element={<Dashboard />} />
         <Route path={PageRoutes.Login} element={<SignIn />} />
-        <Route path={PageRoutes.Dashboard} element={<Dashboard />} />
+        <Route path={PageRoutes.Invoices} element={<Invoices />} />
       </Routes>
     </BrowserRouter>
   );

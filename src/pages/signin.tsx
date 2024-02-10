@@ -36,7 +36,7 @@ const SignIn = () => {
 
     // If validations pass, proceed with sign in
     // For demonstration, let's assume sign-in is successful and navigate to the dashboard
-    navigate(PageRoutes.Dashboard);
+    navigate(PageRoutes.Home);
   };
 
   return (
