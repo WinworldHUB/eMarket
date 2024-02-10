@@ -15,14 +15,18 @@ const Dashboard: React.FC = () => {
     setSelectedCard(card);
     let filteredData: Order[] = [];
     if (card === "Card 1") {
-      filteredData = dummyOrders.filter((order) => order.status === "Sold");
+      filteredData = dummyOrders.filter((order) => order.status === "status1");
     } else if (card === "Card 2") {
       filteredData = dummyOrders.filter(
-        (order) => order.status === "On the way"
+        (order) => order.status === "status2"
       );
     } else if (card === "Card 3") {
       filteredData = dummyOrders.filter(
-        (order) => order.status === "Payment Pending"
+        (order) => order.status === "status3"
+      );
+    } else if (card === "Card 4") {
+      filteredData = dummyOrders.filter(
+        (order) => order.status === "status4"
       );
     }
     setData(filteredData);
@@ -159,7 +163,7 @@ const Dashboard: React.FC = () => {
           </Col>
         </Row>
       </div>
-      <Modal show={!!selectedOrder} onHide={handleCloseModal}>
+      <Modal centered backdrop="static" size="lg" show={!!selectedOrder} onHide={handleCloseModal}>
         <Modal.Header closeButton>
           <Modal.Title>Edit Order</Modal.Title>
         </Modal.Header>
@@ -231,3 +235,7 @@ const Dashboard: React.FC = () => {
 };
 
 export default Dashboard;
+
+
+// delete button in modal on left side
+// fields are static

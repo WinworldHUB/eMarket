@@ -6,10 +6,11 @@ export interface Order {
   paymentDate: string;
 }
 const generateRandomStatus = (): string => {
-  const statuses = ["Sold", "On the way", "Payment Pending"];
+  const statuses = ["status1", "status2", "status3"]; 
   const randomIndex = Math.floor(Math.random() * statuses.length);
   return statuses[randomIndex];
 };
+
 const generateRandomDate = (): string => {
   const startDate = new Date(2020, 0, 1); 
   const endDate = new Date(); 
