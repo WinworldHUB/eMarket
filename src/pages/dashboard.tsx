@@ -175,8 +175,9 @@ const Dashboard: React.FC = () => {
         onHide={handleCloseModal}
       >
         <Modal.Header closeButton>
-          <Modal.Title>Edit Order</Modal.Title>
+          <Modal.Title>#{selectedOrder ? selectedOrder.id : ""}</Modal.Title>
         </Modal.Header>
+
         <Modal.Body>
           <Form.Group controlId="formOrderId">
             <Form.Label>Order ID</Form.Label>
