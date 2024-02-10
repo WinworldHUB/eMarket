@@ -32,7 +32,7 @@ const SideMenu: FC<SideMenuProps> = ({ children }: SideMenuProps) => {
       >
         <ul className="navbar-nav">
           <li className="nav-item">
-            <Link className="nav-link  active" to={PageRoutes.Invoices}>
+            <Link className="nav-link  active" to={PageRoutes.Home}>
               <div className="icon icon-shape icon-sm px-0 text-center d-flex align-items-center justify-content-center">
                 <svg
                   width="30px"
