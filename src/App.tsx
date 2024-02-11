@@ -1,9 +1,13 @@
+import React from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "./pages/home";
+import { Amplify } from 'aws-amplify';
+import awsconfig from './aws-exports'; 
 import SignIn from "./pages/signin";
 import { PageRoutes } from "./lib/constants";
 import Dashboard from "./pages/dashboard";
 import Invoices from "./pages/Invoices";
+
+Amplify.configure(awsconfig);
 
 function App() {
   return (
