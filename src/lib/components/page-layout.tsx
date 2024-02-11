@@ -1,6 +1,20 @@
 import React, { FC } from "react";
-import SideMenu from "./side-menu";
-import { Container, Row, Col } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
+import SidebarMenu from "./sidebar-menu";
+import { FaOpencart, FaFileInvoiceDollar } from "react-icons/fa6";
+
+const APP_MENU: MenuItem[] = [
+  {
+    id: 1,
+    title: "Orders",
+    icon: <FaOpencart />,
+  },
+  {
+    id: 2,
+    title: "Invoices",
+    icon: <FaFileInvoiceDollar />,
+  },
+];
 
 interface PageLayoutProps {
   isShowSideMenu?: boolean;
@@ -12,18 +26,14 @@ const PageLayout: FC<PageLayoutProps> = ({
   children,
 }: PageLayoutProps) => {
   return (
-    <Container fluid>
-      <Row>
-        {isShowSideMenu && (
-          <Col md={3} style={{ backgroundColor: "#f8f9fa" }}>
-            <SideMenu />
-          </Col>
-        )}
-        <Col>
-          {children}
+    <Row className="clearfix">
+      {isShowSideMenu && (
+        <Col md={3} className="bg-primary">
+          <SidebarMenu menuItems={APP_MENU} />
         </Col>
-      </Row>
-    </Container>
+      )}
+      <Col>{children}</Col>
+    </Row>
   );
 };
 
