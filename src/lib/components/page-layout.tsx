@@ -1,17 +1,17 @@
 import React, { FC } from "react";
-import { Row, Col } from "react-bootstrap";
-import SidebarMenu from "./sidebar-menu";
+import { Row, Col, Container } from "react-bootstrap";
 import { FaOpencart, FaFileInvoiceDollar } from "react-icons/fa6";
+import MenuBar from "./menubar";
 
 const APP_MENU: MenuItem[] = [
   {
     id: 1,
-    title: "Orders",
+    label: "Orders",
     icon: <FaOpencart />,
   },
   {
     id: 2,
-    title: "Invoices",
+    label: "Invoices",
     icon: <FaFileInvoiceDollar />,
   },
 ];
@@ -26,14 +26,10 @@ const PageLayout: FC<PageLayoutProps> = ({
   children,
 }: PageLayoutProps) => {
   return (
-    <Row className="clearfix">
-      {isShowSideMenu && (
-        <Col md={3} className="bg-primary">
-          <SidebarMenu menuItems={APP_MENU} />
-        </Col>
-      )}
-      <Col>{children}</Col>
-    </Row>
+    <>
+      <MenuBar menuItems={APP_MENU} onClick={() => {}} selectedItemId={1} />
+      <Container className="pt-3">{children}</Container>
+    </>
   );
 };
 
