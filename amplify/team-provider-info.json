@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-emarket-dev-04554-authRole",
+      "UnauthRoleArn": "arn:aws:iam::216266460758:role/amplify-emarket-dev-04554-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::216266460758:role/amplify-emarket-dev-04554-authRole",
+      "Region": "ap-south-1",
+      "DeploymentBucketName": "amplify-emarket-dev-04554-deployment",
+      "UnauthRoleName": "amplify-emarket-dev-04554-unauthRole",
+      "StackName": "amplify-emarket-dev-04554",
+      "StackId": "arn:aws:cloudformation:ap-south-1:216266460758:stack/amplify-emarket-dev-04554/2a187210-c9db-11ee-98e5-06dbc649f672",
+      "AmplifyAppId": "d24a2ns3w7q9qq"
+    },
+    "categories": {
+      "auth": {
+        "emarket0a77c6f5": {}
+      }
+    }
+  }
+}

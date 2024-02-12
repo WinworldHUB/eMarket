@@ -5,6 +5,7 @@ import PageLayout from "../lib/components/page-layout";
 import { PageRoutes } from "../lib/constants";
 
 const SignIn: React.FC = () => {
+  
   return (
     <PageLayout>
       <div className="main-content mt-0">
@@ -23,12 +24,16 @@ const SignIn: React.FC = () => {
                 <div className="card card-bg card-shadow border-0">
                   <div className="card-body">
                     <Authenticator>
-                      {({ signOut, user }) => (
-                        <main>
-                          <h1>Hello {user?.username}</h1>
-                          <button onClick={signOut}>Sign out</button>
-                        </main>
-                      )}
+                      {({ signOut, user }) => {
+                        console.log(user)
+                        return (
+                          <main>
+                            <h1>Hello {user?.username}</h1>
+                            <button onClick={signOut}>Sign out</button>
+                            
+                          </main>
+                        )
+                      }}
                     </Authenticator>
                   </div>
                 </div>
