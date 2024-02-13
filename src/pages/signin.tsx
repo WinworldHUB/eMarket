@@ -23,7 +23,7 @@ const SignIn: React.FC = () => {
               <div className="col-xl-6 col-lg-7 col-md-9 mx-auto">
                 <div className="card card-bg card-shadow border-0">
                   <div className="card-body">
-                    <Authenticator>
+                    <Authenticator  hideSignUp={true}>
                       {({ signOut, user }) => {
                         console.log(user)
                         return (
