@@ -22,7 +22,7 @@ const InvoiceTable = () => {
     },
     {
       name: 'Invoice Payment',
-      selector: (row) => row.InvoicePayment,
+      selector: (row) =>`₹ ${row.InvoicePayment}`,
       sortable: true,
     },
     {
