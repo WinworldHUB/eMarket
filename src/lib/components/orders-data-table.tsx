@@ -68,6 +68,16 @@ const OrdersDataTable: FC<DataTableProps> = ({
 }: DataTableProps) => {
   const [filterText, setFilterText] = useState<string>("");
   const [activeKey, setActiveKey] = useState<string>(KEY_TODAY);
+  const [selectedOrder, setSelectedOrder] = useState<Order>(null);
+  const [isShowStatusDropDown, setIsShowStatusDropDown] =
+    useState<boolean>(false);
+
+  const onItemClicked = (item: Order) => {
+    setSelectedOrder(item);
+
+    onRowClicked(item);
+  };
+
   const filteredData = useMemo(() => {
     switch (activeKey) {
       case KEY_TODAY:
@@ -132,7 +142,7 @@ const OrdersDataTable: FC<DataTableProps> = ({
           striped
           highlightOnHover
           pagination
-          onRowClicked={onRowClicked}
+          onRowClicked={onItemClicked}
         />
       </Card.Body>
     </Card>
