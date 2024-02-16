@@ -15,13 +15,13 @@
 //     setSelectedCard(card);
 //     let filteredData: Order[] = [];
 //     if (card === "Card 1") {
-//       filteredData = dummyOrders.filter((order: any) => order.status === "status1");
+//       filteredData = dummyOrders.filter((order) => order.status === "status1");
 //     } else if (card === "Card 2") {
-//       filteredData = dummyOrders.filter((order: any) => order.status === "status2");
+//       filteredData = dummyOrders.filter((order) => order.status === "status2");
 //     } else if (card === "Card 3") {
-//       filteredData = dummyOrders.filter((order: any) => order.status === "status3");
+//       filteredData = dummyOrders.filter((order) => order.status === "status3");
 //     } else if (card === "Card 4") {
-//       filteredData = dummyOrders.filter((order: any) => order.status === "status4");
+//       filteredData = dummyOrders.filter((order) => order.status === "status4");
 //     }
 //     setData(filteredData);
 //     updateChart(filteredData);
@@ -186,7 +186,7 @@
 //               disabled
 //               value={selectedOrder ? selectedOrder.id.toString() : ""}
 //               onChange={(e) =>
-//                 setSelectedOrder((prevState: any) => ({
+//                 setSelectedOrder((prevState) => ({
 //                   ...prevState!,
 //                   id: parseInt(e.target.value),
 //                 }))
@@ -200,7 +200,7 @@
 //               disabled
 //               value={selectedOrder ? selectedOrder.orderDate : ""}
 //               onChange={(e) =>
-//                 setSelectedOrder((prevState: any) => ({
+//                 setSelectedOrder((prevState) => ({
 //                   ...prevState!,
 //                   orderDate: e.target.value,
 //                 }))
@@ -212,7 +212,7 @@
 //             <Form.Select
 //               value={selectedOrder ? selectedOrder.status : ""}
 //               onChange={(e) =>
-//                 setSelectedOrder((prevState: any) => ({
+//                 setSelectedOrder((prevState) => ({
 //                   ...prevState!,
 //                   status: e.target.value,
 //                 }))
@@ -231,7 +231,7 @@
 //               disabled
 //               value={selectedOrder ? selectedOrder.orderValue.toString() : ""}
 //               onChange={(e) =>
-//                 setSelectedOrder((prevState: any) => ({
+//                 setSelectedOrder((prevState) => ({
 //                   ...prevState!,
 //                   orderValue: parseFloat(e.target.value),
 //                 }))
@@ -268,4 +268,5 @@
 // export default Dashboard;
 
 // // delete button in modal on left side
-export {}
+
+export {};
